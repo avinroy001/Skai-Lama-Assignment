@@ -1,0 +1,101 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+.containerParent{
+    display: flex;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+}
+.leftPart {
+    width: 60vw;
+    background: linear-gradient(135deg, #6a00f4, #a14eff, #d48eff);
+    position: relative;
+    padding-left: 100px;
+    padding-top: 70px;
+}
+
+.leftPart::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url("../Assets/Group.png") no-repeat center/cover;
+    z-index: 1;
+}
+.logo{
+
+}
+.textLeftFirst{
+    color: #fff;
+    font-size: 90.41px;
+    font-weight: 300;
+    margin-top: -3rem;
+    p{
+        width: 647.74px;
+        height: 321.21px;
+    }
+}
+.textLeftSecond{
+    color: #fff;
+    font-size: 30.9px;
+    font-weight: 300;
+    margin-top: -4rem;
+    p{
+        width: 460.48px;
+        height: 70.34px;
+    }
+}
+.rightPart{
+    width: 40vw;
+    padding-top: 70px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.logoTxt{
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    font-size: 44.72px;
+    text-align: center;
+    color: #7E22CE;
+    ;
+    p{
+        width: 348.88px;
+        height: 98.76px;
+    }
+}
+form{
+    width: 70%;
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    input{
+        height: 50px;
+        font-size: 24.26px;
+        font-weight: 700;
+        opacity: 0.5;
+        padding-left: 20px;
+        border: 1.28px solid grey;
+        border-radius: 7.7px;
+    }
+    div{
+        display: flex;
+        justify-content: space-between;
+    }
+}
+button{
+    width: 70%;
+    border: 0px;
+    border-radius: 7.7px;
+    height: 66.7px;
+    background-color: #7E22CE;
+    font-size: 24.26px;
+    font-weight: 700;
+    color: #fff;
+}
+.checkBox{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

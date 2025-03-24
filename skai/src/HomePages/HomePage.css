@@ -1,0 +1,72 @@
+.mainContainerHomePage {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    justify-content: center; 
+    height: 100vh; 
+}
+
+.containerHomepage {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+}
+
+.containerHomepage img {
+    height: 60px; 
+}
+
+.iconsContainer {
+    display: flex;
+    gap: 20px; 
+}
+
+.homeHeading {
+    text-align: center;
+    font-size: 60.26px;
+    font-weight: 700;
+    color: #7E22CE;
+}
+
+.homeHeading p {
+    margin: 0;
+}
+
+.illustration {
+    width: 442.49px; 
+    height: 296.9px;
+    margin-top: 20px;
+}
+.projectDescription {
+    max-width: 600px;
+    color: #6a6a6a;
+    font-size: 16px;
+    line-height: 1.5;
+    margin-top: 20px;
+}
+
+.createProjectBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background-color: #1a1325; /* Dark purple */
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background 0.3s ease;
+}
+
+.createProjectBtn:hover {
+    background-color: #3a2f50; /* Slightly lighter on hover */
+}
+
+.plusIcon {
+    font-size: 18px;
+}
