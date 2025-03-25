@@ -1,0 +1,50 @@
+.fileListContainer {
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  h2 {
+    margin-bottom: 15px;
+  }
+  
+  .fileTable {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .fileTable th, .fileTable td {
+    padding: 10px 15px;
+    text-align: left;
+  }
+  
+  .fileTable thead {
+    background: #f5f5f5;
+  }
+  
+  .fileTable tbody tr {
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .actionButtons {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .viewBtn {
+    background: white;
+    border: 1px solid #ccc;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+  
+  .deleteBtn {
+    background: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  

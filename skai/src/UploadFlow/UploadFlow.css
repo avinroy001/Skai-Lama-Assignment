@@ -60,3 +60,64 @@
     border-radius: 6px;
     background-color: aquamarine;
 }
+.feedOptions{
+    display: flex;
+    justify-content: space-around;
+}
+.feedCard{
+    padding: 20px;
+    padding-inline: 50px;
+    border: 1px solid rgb(221, 221, 221);
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    box-shadow: 5px 5px rgba(0, 0, 0, 0.2);
+}
+.feedText{
+   p{
+    margin-top: -10px;
+    width: 12rem;
+   }
+
+}
+.uploadSection{
+    padding: 50px;
+    margin-top: 50px;
+    border: 1px solid rgb(221, 221, 221);
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+.button{
+    height: 2rem;
+    width: 7rem;
+    color: #7E22CE;
+    border: 1.93px solid #7E22CE;
+}
+.modalHeading{
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 20px;
+}
+.heading{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.upload{
+    padding: 10px;
+    width: 100px;
+    height: 50px;
+    background-color: black;
+    p{
+        color: white;
+    }
+    
+}
+.upButt{
+    display: flex;
+    justify-content: end;
+}
