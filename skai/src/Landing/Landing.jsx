@@ -1,10 +1,54 @@
 import React, { useState } from "react";
+import axios from "axios";
 import "./Landing.css";
 import Logo from "../Assets/QuesLogo 1.png";
 import SoloLogo from "../Assets/Group 22.png";
+import { useNavigate } from "react-router-dom";
+
 const Landing = () => {
   const [signUp, setSignUp] = useState(false);
-  console.log(signUp);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const nav=useNavigate();
+
+  const handleRegister = async (e) => {
+    e.preventDefault();
+    if (password !== confirmPassword) {
+      alert("Passwords do not match!");
+      return;
+    }
+    try {
+      const res = await axios.post("http://localhost:3001/api/auth/register", {
+        email,
+        password,
+        confirmPassword,
+      });
+      alert(res.data.message);
+      setSignUp(false); 
+    
+    } catch (error) {
+      console.error(error);
+      alert(error.response?.data?.error || "Registration failed");
+    }
+  };
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await axios.post("http://localhost:3001/api/auth/login", {
+        email,
+        password,
+      });
+      alert(res.data.message);
+      localStorage.setItem("token", res.data.token); 
+      nav("/HomePage");
+    } catch (error) {
+      console.error(error);
+      alert(error.response?.data?.error || "Login failed");
+    }
+  };
+
   return (
     <div className="containerParent">
       <div className="leftPart">
@@ -31,12 +75,30 @@ const Landing = () => {
 
         {signUp ? (
           <>
-            <form className="form">
-              <input type="email" placeholder="Email Address" />
-              <input type="password" placeholder="Password" />
-              <input type="password" placeholder="Confirm Password" />
+            <form className="form" onSubmit={handleRegister}>
+              <input
+                type="email"
+                placeholder="Email Address"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+              <input
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+              <input
+                type="password"
+                placeholder="Confirm Password"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                required
+              />
+              <button type="submit">Sign Up</button>
             </form>
-            <button type="submit">Sign Up</button>
 
             <div className="create-account">
               <span>Already have an account? </span>
@@ -47,9 +109,21 @@ const Landing = () => {
           </>
         ) : (
           <>
-            <form className="form">
-              <input type="email" placeholder="Email Address" />
-              <input type="password" placeholder="Password" />
+            <form className="form" onSubmit={handleLogin}>
+              <input
+                type="email"
+                placeholder="Email Address"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+              <input
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
               <div>
                 <div className="checkBox">
                   <input type="checkbox" />
@@ -57,8 +131,8 @@ const Landing = () => {
                 </div>
                 <p>Forgot password?</p>
               </div>
+              <button type="submit">Login</button>
             </form>
-            <button type="submit">Login</button>
 
             <div className="separator">
               <div className="line"></div>
@@ -74,7 +148,6 @@ const Landing = () => {
             </div>
           </>
         )}
-        
       </div>
     </div>
   );
