@@ -3,30 +3,52 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
-import { FaPlus } from "react-icons/fa";
+import { FaPlusCircle } from "react-icons/fa";
 import "./HomePage.css";
+import { border, borderRadius } from '@mui/system';
 
 const style = {
   position: 'absolute',
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 400,
+  width: "50%",
+  height: "21rem%",
   bgcolor: 'background.paper',
-  border: '2px solid #000',
+  border: '0px solid #000',
+  borderRadius: "2rem",
   boxShadow: 24,
-  p: 4,
+  p: 3,
 };
 
 export default function BasicModal() {
   const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const [projectName, setProjectName] = React.useState("");
+  const [error, setError] = React.useState(false);
+  const handleOpen = () => {
+    setOpen(true);
+    setError(false); 
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+    setProjectName("");
+    setError(false);
+  };
+
+  const handleCreate = () => {
+    if (projectName.trim() === "") {
+      setError(true);
+    } else {
+      setError(false);
+      handleClose(); 
+    }
+  };
 
   return (
     <div>
       <button className="createProjectBtn" onClick={handleOpen}>
-              <FaPlus className="plusIcon" /> Create New Project
+              <FaPlusCircle className="plusIcon" /> Create New Project
             </button>
       <Modal
         open={open}
@@ -35,14 +57,21 @@ export default function BasicModal() {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-        <h4>Create Project</h4>
+        <h2>Create Project</h2>
         <form>
-          <label>Enter Project Name:</label>
-          <input placeholder='Type here'/>
+          <p>Enter Project Name:</p>
+          <input
+              className='modalInput'
+              placeholder="Type here"
+              value={projectName}
+              onChange={(e) => setProjectName(e.target.value)}
+            />
         </form>
-        <p>Project Name Can't be empty</p>
-        <button>Cancel</button>
-        <button>Create</button>
+        {error && <p className="errorMessage">Project Name Can't be empty</p>}
+        <div className="buttonPosition">
+            <button onClick={handleClose}>Cancel</button>
+            <button onClick={handleCreate}>Create</button>
+          </div>
         </Box>
       </Modal>
     </div>

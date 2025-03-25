@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import HomeIcon from "../Assets/homepageLogo.png";
 import Illustration from "../Assets/illustration.png"; // Ensure correct path
 import "./HomePage.css";
@@ -7,6 +7,8 @@ import { FaRegBell } from "react-icons/fa";
 import BasicModal from "./BasicModal.jsx"
 
 const HomePage = () => {
+  const [showProjects,setShowProjects]=useState(false);
+  console.log("showProjects",showProjects);
   return (
     <div className="mainContainerHomePage">
       <nav className="containerHomepage">

@@ -1,0 +1,62 @@
+.mainFloatingButton {
+    position: fixed;
+    top: 50%;
+    right: 0;
+    transform: translate(50%, -50%);
+    background-color: #6a00f4;
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+    z-index: 1000;
+}
+
+.mainFloatingButton:hover {
+    background-color: #4a00b4;
+}
+
+/* Button inside drawer (right middle side) */
+.drawerFloatingButton {
+    position: absolute;
+    top: 50%;
+    right: -25px;
+    transform: translateY(-50%);
+    background-color: #6a00f4;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.drawerFloatingButton:hover {
+    background-color: #4a00b4;
+}
+
+.iconStyle {
+    color: white;
+    font-size: 20px;
+}
+.smallDetail{
+    margin-left: 1rem;
+    display: flex;
+    justify-content: start;
+    gap: 2rem;
+}
+.pic{
+    width: 5rem;
+    height: 5rem;
+    border-radius: 6px;
+    background-color: aquamarine;
+}
