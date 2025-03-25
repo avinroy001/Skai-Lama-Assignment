@@ -99,3 +99,52 @@ button{
     justify-content: center;
     align-items: center;
 }
+.separator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin: 20px 0;
+  }
+  
+  .line {
+    flex: 1;
+    height: 1px;
+    background-color: #ccc;
+    margin: 0 10px;
+  }
+  
+  .text {
+    font-weight: bold;
+    color: #666;
+  }
+  .create-account {
+  font-size: 16px;
+  color: #333;
+}
+
+.create-link {
+  font-weight: bold;
+  color: #007bff;
+  text-decoration: none;
+}
+
+.create-link:hover {
+  text-decoration: underline;
+}
+
+.create-account {
+    font-size: 16px;
+    color: #333;
+  }
+  
+  .create-link {
+    font-weight: bold;
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  .create-link:hover {
+    text-decoration: underline;
+  }
+  
