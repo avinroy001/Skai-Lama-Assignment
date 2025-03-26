@@ -21,7 +21,7 @@ const style = {
   p: 3,
 };
 
-export default function BasicModal() {
+export default function BasicModal({setShowProjects}) {
   const [open, setOpen] = React.useState(false);
   const [projectName, setProjectName] = React.useState("");
   const [error, setError] = React.useState(false);
@@ -41,6 +41,25 @@ export default function BasicModal() {
       setError(true);
     } else {
       setError(false);
+      const newProject = {
+        id: Date.now(),
+        name: projectName,
+        files: Math.floor(Math.random() * 10) + 1, // Random file count
+        lastEdited: "Just now",
+        initials: projectName.substring(0, 2).toUpperCase(),
+      };
+  
+      fetch("http://localhost:3001/projects", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(newProject),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          setShowProjects((prevProjects) => [...prevProjects, data]);
+          setProjectName(""); 
+        })
+        .catch((error) => console.error("Error creating project:", error));
       handleClose(); 
     }
   };
