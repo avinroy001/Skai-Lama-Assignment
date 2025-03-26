@@ -24,7 +24,14 @@ exports.createProject = (req, res) => {
 };
 
 exports.deleteProject = (req, res) => {
-  const { id } = req.params;
-  projects = projects.filter((project) => project.id !== id);
-  res.json({ message: "Project deleted successfully" });
-};
+    const { id } = req.params;
+    const projectIndex = projects.findIndex((project) => project.id === id);
+  
+    if (projectIndex === -1) {
+      return res.status(404).json({ message: "Project not found" });
+    }
+  
+    projects.splice(projectIndex, 1);
+    res.json({ message: "Project deleted successfully", id });
+  };
+  

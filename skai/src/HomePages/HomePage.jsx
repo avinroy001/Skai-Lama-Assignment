@@ -3,11 +3,13 @@ import HomeIcon from "../Assets/homepageLogo.png";
 import Illustration from "../Assets/illustration.png";
 import "./HomePage.css";
 import { AiFillSetting } from "react-icons/ai";
-import { FaRegBell } from "react-icons/fa";
+import { FaRegBell, FaTrash } from "react-icons/fa";
 import BasicModal from "./BasicModal";
+import { useNavigate } from "react-router-dom";
 
 const HomePage = () => {
   const [projects, setProjects] = useState([]);
+  const navigate = useNavigate(); 
 
   const fetchProjects = () => {
     fetch("http://localhost:3001/projects")
@@ -19,6 +21,17 @@ const HomePage = () => {
   useEffect(() => {
     fetchProjects();
   }, []);
+
+  const handleDelete = (id) => {
+    fetch(`http://localhost:3001/projects/${id}`, {
+      method: "DELETE",
+    })
+      .then((response) => response.json())
+      .then(() => {
+        setProjects((prevProjects) => prevProjects.filter((project) => project.id !== id));
+      })
+      .catch((error) => console.error("Error deleting project:", error));
+  };
 
   return (
     <div className="mainContainerHomePage">
@@ -48,13 +61,27 @@ const HomePage = () => {
       ) : (
         <div className="projects-container">
           {projects.map((project) => (
-            <div key={project.id} className="project-card">
+            <div 
+              key={project.id} 
+              className="project-card"
+              onClick={() => navigate("/UploadFlowOne")} 
+              style={{ cursor: "pointer" }} 
+            >
               <div className="project-icon">{project.initials}</div>
               <div className="project-details">
                 <h2 className="project-name">{project.name}</h2>
                 <p className="project-files">{project.files} Files</p>
                 <p className="last-edited">Last edited {project.lastEdited}</p>
               </div>
+              <button
+                className="delete-btn"
+                onClick={(e) => {
+                  e.stopPropagation(); 
+                  handleDelete(project.id);
+                }}
+              >
+                <FaTrash /> Delete
+              </button>
             </div>
           ))}
         </div>
