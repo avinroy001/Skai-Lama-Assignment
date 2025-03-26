@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 const HomePage = () => {
   const [projects, setProjects] = useState([]);
   const navigate = useNavigate();
-  const email = localStorage.getItem("email"); // Get email from localStorage
+  const email = localStorage.getItem("email"); 
 
   const fetchProjects = () => {
     if (!email) {

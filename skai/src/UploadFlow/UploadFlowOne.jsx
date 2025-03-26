@@ -16,9 +16,8 @@ import AddPodcast from "./AddPodcast";
 import "./UploadFlow.css"; 
 import HomeIcon from "../Assets/homepageLogo.png";
 import { useNavigate } from "react-router-dom";
+import { GoHome } from "react-icons/go";
 
-
-// Dummy Components for Content Area
 const CreateRepurpose = () => <div className="content"><h2>Create & Repurpose</h2></div>;
 const PodcastWidget = () => <div className="content"><h2>Podcast Widget</h2></div>;
 const Upgrade = () => <div className="content"><h2>Upgrade</h2></div>;
@@ -26,6 +25,7 @@ const Help = () => <div className="content"><h2>Help Section</h2></div>;
 
 export default function UploadFlowOne() {
   const [selectedComponent, setSelectedComponent] = React.useState(<AddPodcast />);
+  const email = localStorage.getItem("email");
 
   const navigate=useNavigate();
   const menuItems = [
@@ -38,7 +38,6 @@ export default function UploadFlowOne() {
   return (
     <div style={{ display: "flex", height: "100vh" }}>
       
-      {/* Sidebar Drawer - Fixed */}
       <Drawer 
         variant="permanent" 
         sx={{
@@ -78,13 +77,12 @@ export default function UploadFlowOne() {
             <div className="pic">avin</div>
             <div className="username">
               <p>Username</p>
-              <p>email</p>
+              <p>{email}</p>
             </div>
           </div>
         </Box>
       </Drawer>
 
-      {/* Main Content Area (Right Side) */}
       <div style={{ flex: 1, padding: "20px", background: "#F5F5F5" }}>
         {selectedComponent}
       </div>
