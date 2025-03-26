@@ -9,11 +9,15 @@ import BasicModal from "./BasicModal";
 const HomePage = () => {
   const [projects, setProjects] = useState([]);
 
-  useEffect(() => {
+  const fetchProjects = () => {
     fetch("http://localhost:3001/projects")
       .then((response) => response.json())
       .then((data) => setProjects(data))
       .catch((error) => console.error("Error fetching projects:", error));
+  };
+
+  useEffect(() => {
+    fetchProjects();
   }, []);
 
   return (
@@ -56,7 +60,7 @@ const HomePage = () => {
         </div>
       )}
 
-      <BasicModal setProjects={setProjects} />
+      <BasicModal fetchProjects={fetchProjects} />
     </div>
   );
 };

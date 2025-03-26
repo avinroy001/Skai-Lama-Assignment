@@ -1,33 +1,31 @@
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import Modal from '@mui/material/Modal';
+import React, { useState } from "react";
+import Box from "@mui/material/Box";
+import Modal from "@mui/material/Modal";
 import { FaPlusCircle } from "react-icons/fa";
 import "./HomePage.css";
-import { border, borderRadius } from '@mui/system';
 
 const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
   width: "50%",
   height: "21rem%",
-  bgcolor: 'background.paper',
-  border: '0px solid #000',
+  bgcolor: "background.paper",
+  border: "0px solid #000",
   borderRadius: "2rem",
   boxShadow: 24,
   p: 3,
 };
 
-export default function BasicModal({setShowProjects}) {
-  const [open, setOpen] = React.useState(false);
-  const [projectName, setProjectName] = React.useState("");
-  const [error, setError] = React.useState(false);
+export default function BasicModal({ fetchProjects }) {
+  const [open, setOpen] = useState(false);
+  const [projectName, setProjectName] = useState("");
+  const [error, setError] = useState(false);
+
   const handleOpen = () => {
     setOpen(true);
-    setError(false); 
+    setError(false);
   };
 
   const handleClose = () => {
@@ -39,55 +37,43 @@ export default function BasicModal({setShowProjects}) {
   const handleCreate = () => {
     if (projectName.trim() === "") {
       setError(true);
-    } else {
-      setError(false);
-      const newProject = {
-        id: Date.now(),
-        name: projectName,
-        files: Math.floor(Math.random() * 10) + 1, // Random file count
-        lastEdited: "Just now",
-        initials: projectName.substring(0, 2).toUpperCase(),
-      };
-  
-      fetch("http://localhost:3001/projects", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(newProject),
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          setShowProjects((prevProjects) => [...prevProjects, data]);
-          setProjectName(""); 
-        })
-        .catch((error) => console.error("Error creating project:", error));
-      handleClose(); 
+      return;
     }
+
+    const newProject = {
+      name: projectName,
+    };
+
+    fetch("http://localhost:3001/projects", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(newProject),
+    })
+      .then((response) => response.json())
+      .then(() => {
+        fetchProjects();
+        setProjectName("");
+        handleClose();
+      })
+      .catch((error) => console.error("Error creating project:", error));
   };
 
   return (
     <div>
       <button className="createProjectBtn" onClick={handleOpen}>
-              <FaPlusCircle className="plusIcon" /> Create New Project
-            </button>
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
+        <FaPlusCircle className="plusIcon" /> Create New Project
+      </button>
+      <Modal open={open} onClose={handleClose}>
         <Box sx={style}>
-        <h2>Create Project</h2>
-        <form>
-          <p>Enter Project Name:</p>
+          <h2>Create Project</h2>
           <input
-              className='modalInput'
-              placeholder="Type here"
-              value={projectName}
-              onChange={(e) => setProjectName(e.target.value)}
-            />
-        </form>
-        {error && <p className="errorMessage">Project Name Can't be empty</p>}
-        <div className="buttonPosition">
+            className="modalInput"
+            placeholder="Type here"
+            value={projectName}
+            onChange={(e) => setProjectName(e.target.value)}
+          />
+          {error && <p className="errorMessage">Project Name Can't be empty</p>}
+          <div className="buttonPosition">
             <button onClick={handleClose}>Cancel</button>
             <button onClick={handleCreate}>Create</button>
           </div>
