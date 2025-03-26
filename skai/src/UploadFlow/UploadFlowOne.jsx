@@ -14,6 +14,9 @@ import { FiCopy } from "react-icons/fi";
 import { RiVipDiamondLine } from "react-icons/ri";
 import AddPodcast from "./AddPodcast";
 import "./UploadFlow.css"; 
+import HomeIcon from "../Assets/homepageLogo.png";
+import { useNavigate } from "react-router-dom";
+
 
 // Dummy Components for Content Area
 const CreateRepurpose = () => <div className="content"><h2>Create & Repurpose</h2></div>;
@@ -24,6 +27,7 @@ const Help = () => <div className="content"><h2>Help Section</h2></div>;
 export default function UploadFlowOne() {
   const [selectedComponent, setSelectedComponent] = React.useState(<AddPodcast />);
 
+  const navigate=useNavigate();
   const menuItems = [
     { text: "Add your Podcast(s)", icon: <FaPlus />, component: <AddPodcast /> },
     { text: "Create & Repurpose", icon: <MdOutlineCreate />, component: <CreateRepurpose /> },
@@ -44,8 +48,10 @@ export default function UploadFlowOne() {
         }}
       >
         <Box sx={{ width: 300, display: "flex", flexDirection: "column", height: "100%" }} role="presentation">
+          <img src={HomeIcon} alt="HomeIcon" className="logoo" onClick={()=>navigate('/HomePage')}/>
           <List>
             {menuItems.map((item) => (
+
               <ListItem key={item.text} disablePadding>
                 <ListItemButton onClick={() => setSelectedComponent(item.component)}>
                   <ListItemIcon>{item.icon}</ListItemIcon>

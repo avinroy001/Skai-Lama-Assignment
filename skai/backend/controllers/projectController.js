@@ -1,35 +1,52 @@
-let { projects, projectId } = require("../models/projectModel");
+const projectService = require("../services/projectService");
 
-exports.getProjects = (req, res) => {
-  res.json(projects);
-};
+const getProjectsByEmail = async (req, res) => {
+  try {
+    const { email } = req.body;
 
-exports.createProject = (req, res) => {
-  const { name } = req.body;
-  if (!name) {
-    return res.status(400).json({ message: "Project name is required" });
+    if (!email) {
+      return res.status(400).json({ message: "Email is required" });
+    }
+
+    const projects = await projectService.getProjects(email);
+
+    if (!projects) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    res.status(200).json({ projects });
+  } catch (error) {
+    console.error("Error fetching projects:", error);
+    res.status(500).json({ message: "Server error" });
   }
-
-  const newProject = {
-    id: projectId++,
-    name,
-    files: Math.floor(Math.random() * 10) + 1,
-    lastEdited: "Just now",
-    initials: name.substring(0, 2).toUpperCase(),
-  };
-
-  projects.push(newProject);
-  res.status(201).json(newProject);
 };
 
-exports.deleteProject = (req, res) => {
-  const id = parseInt(req.params.id); // Convert ID to a number
-  const projectIndex = projects.findIndex((project) => project.id === id);
+const createProjectForUser = async (req, res) => {
+  try {
+    const { email, name } = req.body;
 
-  if (projectIndex === -1) {
-    return res.status(404).json({ message: "Project not found" });
+    if (!email || !name) {
+      return res.status(400).json({ message: "Email and project name are required" });
+    }
+
+    const newProject = await projectService.addProject(email, name);
+    res.status(201).json(newProject);
+  } catch (error) {
+    console.error("Error adding project:", error);
+    res.status(500).json({ message: "Server error" });
   }
-
-  projects.splice(projectIndex, 1);
-  res.json({ message: "Project deleted successfully", id });
 };
+
+// const deleteProject = (req, res) => {
+//   const id = parseInt(req.params.id); // Convert ID to a number
+//   const projectIndex = projects.findIndex((project) => project.id === id);
+
+//   if (projectIndex === -1) {
+//     return res.status(404).json({ message: "Project not found" });
+//   }
+
+//   projects.splice(projectIndex, 1);
+//   res.json({ message: "Project deleted successfully", id });
+// };
+
+module.exports = {getProjectsByEmail, createProjectForUser}

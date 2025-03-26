@@ -42,6 +42,7 @@ const Landing = () => {
       });
       alert(res.data.message);
       localStorage.setItem("token", res.data.token); 
+      localStorage.setItem("email", email);
       nav("/HomePage");
     } catch (error) {
       console.error(error);

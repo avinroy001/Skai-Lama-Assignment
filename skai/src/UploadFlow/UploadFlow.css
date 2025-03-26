@@ -121,3 +121,7 @@
     display: flex;
     justify-content: end;
 }
+.logoo{
+    width: 200px;
+    margin: 1rem;
+}

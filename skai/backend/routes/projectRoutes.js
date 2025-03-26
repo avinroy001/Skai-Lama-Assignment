@@ -2,8 +2,7 @@ const express = require("express");
 const router = express.Router();
 const projectController = require("../controllers/projectController");
 
-router.get("/", projectController.getProjects);
-router.post("/", projectController.createProject);
-router.delete("/:id", projectController.deleteProject);
+router.post("/get-projects", projectController.getProjectsByEmail);
+router.post("/add-project", projectController.createProjectForUser);
 
 module.exports = router;

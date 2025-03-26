@@ -1,17 +1,18 @@
 .mainContainerHomePage {
-    display: flex;
+    /* display: flex;
     flex-direction: column;
     align-items: center; 
     justify-content: center; 
-    height: 100vh; 
+    height: 100vh;  */
+    padding: 1.5rem;
 }
 
 .containerHomepage {
-    margin-top: -9rem;
+    /* margin: 1rem; */
     display: flex;
     justify-content:space-between;
     align-items: center;
-    width: 95%;
+    box-sizing: border-box;
 }
 
 .containerHomepage img {
@@ -136,8 +137,8 @@
     color: white;
     font-size: 24px;
     font-weight: bold;
-    width: 60px;
-    height: 60px;
+    width: 130px;
+    height: 80px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -180,4 +181,19 @@
   .delete-btn:hover {
     color: #d32f2f;
   }
-  
+  .homeHead{
+    /* margin: 2rem; */
+    text-align: center;
+    font-size: 60.26px;
+    font-weight: 700;
+    color: #7E22CE;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .containerChild{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }

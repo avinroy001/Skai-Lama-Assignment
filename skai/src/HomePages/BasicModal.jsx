@@ -22,6 +22,7 @@ export default function BasicModal({ fetchProjects }) {
   const [open, setOpen] = useState(false);
   const [projectName, setProjectName] = useState("");
   const [error, setError] = useState(false);
+  const email = localStorage.getItem("email");
 
   const handleOpen = () => {
     setOpen(true);
@@ -44,18 +45,19 @@ export default function BasicModal({ fetchProjects }) {
       name: projectName,
     };
 
-    fetch("http://localhost:3001/projects", {
+    fetch("http://localhost:3001/projects/add-project", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(newProject),
+      body: JSON.stringify({ email, name: projectName }),
     })
       .then((response) => response.json())
       .then(() => {
         fetchProjects();
         setProjectName("");
-        handleClose();
+        // handleClose();
       })
       .catch((error) => console.error("Error creating project:", error));
+      handleClose();
   };
 
   return (
