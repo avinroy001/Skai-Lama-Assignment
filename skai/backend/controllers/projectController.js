@@ -1,5 +1,4 @@
-const { v4: uuidv4 } = require("uuid");
-let projects = require("../models/projectModel");
+let { projects, projectId } = require("../models/projectModel");
 
 exports.getProjects = (req, res) => {
   res.json(projects);
@@ -12,7 +11,7 @@ exports.createProject = (req, res) => {
   }
 
   const newProject = {
-    id: uuidv4(),
+    id: projectId++,
     name,
     files: Math.floor(Math.random() * 10) + 1,
     lastEdited: "Just now",
@@ -24,14 +23,13 @@ exports.createProject = (req, res) => {
 };
 
 exports.deleteProject = (req, res) => {
-    const { id } = req.params;
-    const projectIndex = projects.findIndex((project) => project.id === id);
-  
-    if (projectIndex === -1) {
-      return res.status(404).json({ message: "Project not found" });
-    }
-  
-    projects.splice(projectIndex, 1);
-    res.json({ message: "Project deleted successfully", id });
-  };
-  
+  const id = parseInt(req.params.id); // Convert ID to a number
+  const projectIndex = projects.findIndex((project) => project.id === id);
+
+  if (projectIndex === -1) {
+    return res.status(404).json({ message: "Project not found" });
+  }
+
+  projects.splice(projectIndex, 1);
+  res.json({ message: "Project deleted successfully", id });
+};

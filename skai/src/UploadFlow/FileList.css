@@ -34,6 +34,7 @@
   
   .viewBtn {
     background: white;
+    color: black;
     border: 1px solid #ccc;
     padding: 5px 10px;
     cursor: pointer;
