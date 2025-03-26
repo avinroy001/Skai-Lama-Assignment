@@ -1,13 +1,12 @@
 import React from "react";
-import "./FileList.css"; // Import CSS for styling
+import "./FileList.css"; 
 
-const files = [
-  { id: 1, name: "THE SIDEPOD S2 EPISODE 15", date: "25 Oct 23 | 09:04" },
-  { id: 2, name: "THE SIDEPOD S2 EPISODE 17", date: "27 Oct 23 | 11:08" },
-  { id: 3, name: "THE SIDEPOD S2 EPISODE 20", date: "31 Oct 23 | 20:28" },
-];
+const FileList = ({ files, setFiles }) => {
+  const handleDelete = (id) => {
+    const updatedFiles = files.filter(file => file.id !== id);
+    setFiles(updatedFiles);
+  };
 
-const FileList = () => {
   return (
     <div className="fileListContainer">
       <h2>Your Files</h2>
@@ -28,7 +27,7 @@ const FileList = () => {
               <td>{file.date}</td>
               <td className="actionButtons">
                 <button className="viewBtn">View</button>
-                <button className="deleteBtn">Delete</button>
+                <button className="deleteBtn" onClick={() => handleDelete(file.id)}>Delete</button>
               </td>
             </tr>
           ))}

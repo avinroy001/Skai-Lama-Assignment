@@ -1,21 +1,24 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
 import YT from "../Assets/image 2.png";
 import CLOSE from "../Assets/closeSym.png";
 import "./UploadFlow.css";
+import RSS from "../Assets/image 1.png";
+import UPPFILE from "../Assets/image3inn.png";
 
 const style = {
   position: "absolute",
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: 600,
+  width: '50%',
+  height: '55%',
   bgcolor: "background.paper",
   border: "2px solid #000",
+  borderRadius: '1rem',
   boxShadow: 24,
-  p: 4,
+  p: 6,
 };
 
 export default function ModalUpload() {
@@ -23,9 +26,28 @@ export default function ModalUpload() {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
+  const feedItems = [
+    { title: "RSS Feed", content: "Lorem ipsum dolor sit. Dolor lorem sit.", pic: RSS },
+    { title: "YouTube Video", content: "Lorem ipsum dolor sit. Dolor lorem sit.", pic: YT },
+    { title: "Upload Files", content: "Lorem ipsum dolor sit. Dolor lorem sit.", pic: UPPFILE }
+  ];
+
   return (
     <div>
-      <Button onClick={handleOpen}>Select File</Button>
+      <div className="feedOptions">
+              {feedItems.map((item, index) => (
+                <div key={index} className="feedCard" onClick={handleOpen}>
+                  <div className="feedText">
+                    <h3>{item.title}</h3>
+                    <p>{item.content}</p>
+                  </div>
+                  <div className="feedImage">
+                    <img src={item.pic} alt={item.title} />
+                  </div>
+                </div>
+              ))}
+            </div>
+      
       <Modal
         open={open}
         onClose={handleClose}
@@ -49,13 +71,13 @@ export default function ModalUpload() {
 
           <div>
             <p>Name</p>
-            <input />
+            <input className="nameInput"/>
             <p>transcript</p>
-            <textarea name="myText" rows="10" cols="50"></textarea>
+            <textarea name="myText" rows="10" cols="102"></textarea>
           </div>
           <div className="upButt">
           <div className="upload">
-            <p>Upload</p>
+            Upload
           </div>
           </div>
           

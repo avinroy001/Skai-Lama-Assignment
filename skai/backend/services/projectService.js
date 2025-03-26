@@ -9,12 +9,12 @@ const addProject = async (email, name) => {
   let user = await ProjectModel.findOne({ email });
 
   if (!user) {
-    user = new ProjectModel({ email, projects: [] }); // ✅ Use ProjectModel instead of Project
+    user = new ProjectModel({ email, projects: [] }); 
   }
 
   const newProject = {
     name,
-    files: Math.floor(Math.random() * 10) + 1, // Random file count
+    files: Math.floor(Math.random() * 10) + 1, 
     lastEdited: "Just now",
     createdAt: new Date(),
     initials: name.substring(0, 2).toUpperCase(),
