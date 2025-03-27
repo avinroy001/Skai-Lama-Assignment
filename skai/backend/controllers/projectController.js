@@ -1,5 +1,5 @@
 // const projectService = require("../services/projectService");
-const ProjectModel = require("../models/ProjectModel");
+const ProjectModel = require("../models/projectModel");
 
 const getProjectsByEmail = async (req, res) => {
   try {
