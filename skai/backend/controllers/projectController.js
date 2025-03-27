@@ -145,4 +145,23 @@ const deletePodcastForUser = async (req, res) => {
   }
 };
 
-module.exports = { getProjectsByEmail, createProjectForUser, addPodcastForUser, getPodcastsByEmail, deletePodcastForUser };
+const getTranscriptById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const project = await ProjectModel.findOne({ "projects.podcasts._id": id });
+
+    if (!project) return res.status(404).json({ message: "Podcast not found" });
+
+    const podcast = project.projects.flatMap(p => p.podcasts).find(p => p._id.toString() === id);
+
+    if (!podcast) return res.status(404).json({ message: "Podcast not found" });
+
+    res.json({ transcript: podcast.transcript });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+
+module.exports = { getProjectsByEmail, createProjectForUser, addPodcastForUser, getPodcastsByEmail, deletePodcastForUser, getTranscriptById };
