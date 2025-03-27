@@ -1,4 +1,4 @@
-const projectService = require("../services/projectService");
+// const projectService = require("../services/projectService");
 const ProjectModel = require("../models/ProjectModel");
 
 const getProjectsByEmail = async (req, res) => {
@@ -9,13 +9,13 @@ const getProjectsByEmail = async (req, res) => {
       return res.status(400).json({ message: "Email is required" });
     }
 
-    const projects = await projectService.getProjects(email);
+    const user = await ProjectModel.findOne({ email });
 
-    if (!projects) {
+    if (!user || !user.projects) {
       return res.status(404).json({ message: "User not found" });
     }
 
-    res.status(200).json({ projects });
+    res.status(200).json({ projects: user.projects });
   } catch (error) {
     console.error("Error fetching projects:", error);
     res.status(500).json({ message: "Server error" });
@@ -30,13 +30,30 @@ const createProjectForUser = async (req, res) => {
       return res.status(400).json({ message: "Email and project name are required" });
     }
 
-    const newProject = await projectService.addProject(email, name);
+    let user = await ProjectModel.findOne({ email });
+
+    if (!user) {
+      user = new ProjectModel({ email, projects: [] });
+    }
+
+    const newProject = {
+      name,
+      files: Math.floor(Math.random() * 10) + 1,
+      lastEdited: "Just now",
+      createdAt: new Date(),
+      initials: name.substring(0, 2).toUpperCase(),
+    };
+
+    user.projects.push(newProject);
+    await user.save();
+
     res.status(201).json(newProject);
   } catch (error) {
     console.error("Error adding project:", error);
     res.status(500).json({ message: "Server error" });
   }
 };
+
 
 // const deleteProject = (req, res) => {
 //   const id = parseInt(req.params.id); // Convert ID to a number
