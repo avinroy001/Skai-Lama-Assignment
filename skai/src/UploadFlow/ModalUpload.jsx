@@ -51,7 +51,7 @@ export default function ModalUpload({ fetchFiles }) {
     }
 console.log(new Date().toISOString());
     try {
-      const response = await axios.post("http://localhost:3001/projects/add-podcasts", {
+      const response = await axios.post("https://skai-lama-assignment-0m1m.onrender.com/projects/add-podcasts", {
         email,
         projectName,
         podcastName: name,  

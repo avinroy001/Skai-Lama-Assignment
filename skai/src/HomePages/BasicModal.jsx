@@ -45,7 +45,7 @@ export default function BasicModal({ fetchProjects }) {
       name: projectName,
     };
 
-    fetch("http://localhost:3001/projects/add-project", {
+    fetch("https://skai-lama-assignment-0m1m.onrender.com/projects/add-project", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, name: projectName }),

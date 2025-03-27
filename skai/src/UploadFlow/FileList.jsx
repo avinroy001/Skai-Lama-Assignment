@@ -9,7 +9,7 @@ const FileList = ({ files, setFiles, fetchFiles }) => {
 
   const handleView = async (id) => {
     try {
-      const response = await fetch(`http://localhost:3001/projects/get-transcript/${id}`);
+      const response = await fetch(`https://skai-lama-assignment-0m1m.onrender.com/projects/get-transcript/${id}`);
       const data = await response.json();
 
       if (response.ok) {
@@ -25,7 +25,7 @@ const FileList = ({ files, setFiles, fetchFiles }) => {
 
   const handleDelete = async (id) => {
     try {
-      const response = await fetch(`http://localhost:3001/projects/delete-podcast/${id}`, {
+      const response = await fetch(`https://skai-lama-assignment-0m1m.onrender.com/projects/delete-podcast/${id}`, {
         method: "DELETE",
       });
 

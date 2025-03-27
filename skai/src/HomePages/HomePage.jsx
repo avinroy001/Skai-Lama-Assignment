@@ -18,7 +18,7 @@ const HomePage = () => {
       return;
     }
 
-    fetch("http://localhost:3001/projects/get-projects", {
+    fetch("https://skai-lama-assignment-0m1m.onrender.com/projects/get-projects", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -35,7 +35,7 @@ const HomePage = () => {
   }, []);
 
   const handleDelete = (id) => {
-    fetch(`http://localhost:3001/projects/delete-project/${id}`, {
+    fetch(`https://skai-lama-assignment-0m1m.onrender.com/projects/delete-project/${id}`, {
       method: "DELETE",
     })
       .then((response) => response.json())

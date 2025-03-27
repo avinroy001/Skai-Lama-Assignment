@@ -19,7 +19,7 @@ const Landing = () => {
       return;
     }
     try {
-      const res = await axios.post("http://localhost:3001/api/auth/register", {
+      const res = await axios.post("https://skai-lama-assignment-0m1m.onrender.com/api/auth/register", {
         email,
         password,
         confirmPassword,
@@ -36,7 +36,7 @@ const Landing = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:3001/api/auth/login", {
+      const res = await axios.post("https://skai-lama-assignment-0m1m.onrender.com/api/auth/login", {
         email,
         password,
       });

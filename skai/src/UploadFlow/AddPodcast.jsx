@@ -15,7 +15,7 @@ const AddPodcast = () => {
   const fetchFiles = async () => {
     // <FileList files={files} setFiles={setFiles} fetchFiles={fetchFiles} />
     try {
-      const response = await fetch("http://localhost:3001/projects/get-podcasts", {
+      const response = await fetch("https://skai-lama-assignment-0m1m.onrender.com/projects/get-podcasts", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
