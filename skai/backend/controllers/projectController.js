@@ -114,4 +114,35 @@ const getPodcastsByEmail = async (req, res) => {
   }
 };
 
-module.exports = { getProjectsByEmail, createProjectForUser, addPodcastForUser, getPodcastsByEmail };
+const deletePodcastForUser = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    let user = await ProjectModel.findOne({ "projects.podcasts._id": id });
+
+    if (!user) {
+      return res.status(404).json({ error: "Podcast not found" });
+    }
+
+    let projectFound = false;
+
+    user.projects.forEach((project) => {
+      const initialLength = project.podcasts.length;
+      project.podcasts = project.podcasts.filter((podcast) => podcast._id.toString() !== id);
+      if (project.podcasts.length < initialLength) projectFound = true;
+    });
+
+    if (!projectFound) {
+      return res.status(404).json({ error: "Podcast not found in any project" });
+    }
+
+    await user.save();
+
+    return res.status(200).json({ message: "Podcast deleted successfully" });
+  } catch (error) {
+    console.error("Error deleting podcast:", error);
+    return res.status(500).json({ error: "Internal Server Error" });
+  }
+};
+
+module.exports = { getProjectsByEmail, createProjectForUser, addPodcastForUser, getPodcastsByEmail, deletePodcastForUser };
