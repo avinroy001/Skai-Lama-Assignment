@@ -26,4 +26,31 @@ const addProject = async (email, name) => {
   return newProject;
 };
 
-module.exports = { getProjects, addProject };
+const addPodcastToProject = async (email, projectName, podcastName, transcript) => {
+  let user = await ProjectModel.findOne({ email });
+
+  if (!user) {
+    return { error: "User not found" };
+  }
+
+  let project = user.projects.find((proj) => proj.name === projectName);
+
+  if (!project) {
+    return { error: "Project not found" };
+  }
+
+  const newPodcast = {
+    name: podcastName,
+    transcript,
+    createdAt: new Date(),
+  };
+
+  project.podcasts.push(newPodcast);
+
+  await user.save();
+
+  return newPodcast;
+};
+
+
+module.exports = { getProjects, addProject, addPodcastToProject };

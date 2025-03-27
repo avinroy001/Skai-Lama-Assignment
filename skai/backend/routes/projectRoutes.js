@@ -4,5 +4,8 @@ const projectController = require("../controllers/projectController");
 
 router.post("/get-projects", projectController.getProjectsByEmail);
 router.post("/add-project", projectController.createProjectForUser);
+router.post("/add-podcasts", projectController.addPodcastForUser);
+router.post("/get-podcasts", projectController.getPodcastsByEmail);
+
 
 module.exports = router;
