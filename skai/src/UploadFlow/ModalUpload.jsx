@@ -28,7 +28,7 @@ export default function ModalUpload({ fetchFiles }) {
   const [name, setName] = React.useState("");
   const [transcript, setTranscript] = React.useState("");
   // const email = localStorage.getItem("email"); 
-  localStorage.setItem("selectedProject", "MyTestProject");
+  // localStorage.setItem("selectedProject", "MyTestProject");
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => {
@@ -49,12 +49,13 @@ export default function ModalUpload({ fetchFiles }) {
       alert("Please select a project before uploading a podcast.");
       return;
     }
-
+console.log(new Date().toISOString());
     try {
       const response = await axios.post("http://localhost:3001/projects/add-podcasts", {
         email,
         projectName,
         podcastName: name,  
+        date: new Date().toISOString(),
         transcript,
       });
 

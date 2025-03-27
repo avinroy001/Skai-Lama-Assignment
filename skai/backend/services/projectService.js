@@ -1,4 +1,5 @@
-const ProjectModel = require("../models/ProjectModel");
+// const ProjectModel = require("../models/ProjectModel");
+const ProjectModel = require('../models/ProjectModel')
 
 const getProjects = async (email) => {
   const user = await ProjectModel.findOne({ email });

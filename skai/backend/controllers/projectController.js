@@ -52,7 +52,7 @@ const createProjectForUser = async (req, res) => {
 
 const addPodcastForUser = async (req, res) => {
   try {
-    const { email, projectName, podcastName, transcript } = req.body;
+    const { email, projectName, podcastName, date, transcript } = req.body;
 
     if (!email || !projectName || !podcastName || !transcript) {
       return res.status(400).json({ message: "All fields are required" });
@@ -74,7 +74,7 @@ const addPodcastForUser = async (req, res) => {
     project.files += 1; 
     project.lastEdited = new Date().toLocaleString(); 
     if (!project.podcasts) project.podcasts = [];
-    project.podcasts.push({ name: podcastName, transcript });
+    project.podcasts.push({ name: "aaaaaaa", transcript,createdAt: new Date() });
 
     await user.save();
     return res.status(201).json({ message: "Podcast added successfully", project });
@@ -102,7 +102,7 @@ const getPodcastsByEmail = async (req, res) => {
       project.podcasts.map((podcast) => ({
         id: podcast._id,
         name: podcast.name,
-        date: podcast.uploadedAt || "Unknown Date",
+        date: podcast.createdAt || "Unknown Date",
         projectName: project.name, 
       }))
     );

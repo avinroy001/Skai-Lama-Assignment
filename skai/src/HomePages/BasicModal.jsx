@@ -40,7 +40,7 @@ export default function BasicModal({ fetchProjects }) {
       setError(true);
       return;
     }
-
+    localStorage.setItem("selectedProject", projectName);
     const newProject = {
       name: projectName,
     };
@@ -53,7 +53,6 @@ export default function BasicModal({ fetchProjects }) {
       .then((response) => response.json())
       .then(() => {
         fetchProjects();
-        localStorage.setItem("selectedProject", projectName);
         setProjectName("");
         // handleClose();
       })
