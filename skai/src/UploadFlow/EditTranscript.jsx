@@ -20,6 +20,7 @@ const EditTranscript = ({ transcript, onBack }) => {
       <EditorContent
         editor={editor}
         style={{
+            height: "100vh",
           border: "2px solid #ccc",
           borderRadius: "8px",
           padding: "10px",
