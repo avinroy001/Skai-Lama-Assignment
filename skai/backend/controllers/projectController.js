@@ -91,7 +91,7 @@ const addPodcastForUser = async (req, res) => {
     project.files += 1; 
     project.lastEdited = new Date().toLocaleString(); 
     if (!project.podcasts) project.podcasts = [];
-    project.podcasts.push({ name: "aaaaaaa", transcript,createdAt: new Date() });
+    project.podcasts.push({ name: podcastName, transcript,createdAt: new Date() });
 
     await user.save();
     return res.status(201).json({ message: "Podcast added successfully", project });
